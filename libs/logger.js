@@ -1,12 +1,10 @@
 
-const { env2formats } = require('./log-formats')
+const { prodFormat } = require('./log-formats')
 const { filterLevel, filterSecrets } = require('./log-filters')
 
-const { DEBUG, NODE_ENV, LOG_LEVEL } = process.env
-const env = (env2formats[NODE_ENV] && NODE_ENV) || 'production'
+const { DEBUG, LOG_LEVEL } = process.env
 
 let level = LOG_LEVEL || (DEBUG && DEBUG.length ? 'debug' : 'info')
-const format = env2formats[env]
 const filters = [filterLevel, filterSecrets]
 
 const filterOut = function (level, type, message, label, namespace) {
@@ -30,7 +28,7 @@ const filterOut = function (level, type, message, label, namespace) {
  *
  * @example
  *
- * They will be colored in development mode. In production mode, those logs are formatted in JSON to be interpreted by the stack and possibly sent to the client. `error` will stop the konnector.
+ * Those logs are formatted in JSON to be interpreted by the stack and possibly sent to the client. `critical` will stop the konnector.
  *
  * ```js
  * logger = log('my-namespace')
@@ -48,7 +46,7 @@ function log (type, message, label, namespace) {
   if (filterOut(level, type, message, label, namespace)) {
     return
   }
-  console.log(format(type, message, label, namespace))
+  console.log(prodFormat(type, message, label, namespace))
 
   // Try to stop the connector after current running io before the stack
   if (type === 'critical') setImmediate(() => process.exit(1))

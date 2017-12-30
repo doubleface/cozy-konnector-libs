@@ -7,8 +7,8 @@
 [Cozy] Konnector Libs
 =====================
 
-This package contains all the shared libs which can help the creation of a connector and also the
-cli tools to run a connector outside a cozy.
+This package contains all the shared libs which can help the creation of a connector.
+To get cli tools to run a connector outside a cozy, please go to [cozy-konnector-cli](https://github.com/cozy/cozy-konnector-cli)
 
 1. View the [interactive tutorial](https://tech.io/playgrounds/1482/cozy-connector-tutorial/save-cats).
 

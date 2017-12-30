@@ -58,7 +58,7 @@ class baseKonnector {
    * Hook called when the connector is ended
    */
   end () {
-    log('info', 'The connector has been run')
+    log('info', 'CONNECTOR_END')
   }
 
   /**

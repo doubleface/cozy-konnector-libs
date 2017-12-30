@@ -33,7 +33,8 @@ const getCozyUrl = function () {
 
 const getCozyClient = function (environment = 'production') {
   if (environment === 'standalone' || environment === 'test') {
-    return require('../helpers/cozy-client-js-stub')
+    // this is given by cozy-konnector-cli
+    return require(process.env.COZY_CLIENT_STUB)
   }
 
   const credentials = getCredentials(environment)
